@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { toast } from "react-toastify";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { FiEye } from "react-icons/fi";
@@ -24,19 +25,18 @@ function SignIn() {
   const onSubmit = async (e) => {
     e.preventDefault();
     const auth = getAuth();
-
-    const userCredential = await signInWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
-
-    if (userCredential.user) {
-      navigate("/");
-    }
     try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+      if (userCredential.user) {
+        navigate("/");
+      }
     } catch (error) {
-      console.log(error);
+      toast.error("Invalid credentials!");
     }
   };
 
