@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 function Profile() {
   const auth = getAuth();
-
+  const [changeDetails, setChangeDetails] = useState(false);
   const [formData, setFormData] = useState({
     name: auth.currentUser.displayName,
     email: auth.currentUser.email,
@@ -19,6 +19,10 @@ function Profile() {
     navigate("/");
   };
 
+  const onSubmit = () => {
+    console.log(123);
+  };
+
   return (
     <section className="mt-4">
       <header className="w-full flex items-center justify-between">
@@ -31,6 +35,21 @@ function Profile() {
           Logout
         </button>
       </header>
+
+      <main role="main" className="mt-8">
+        <div className="w-96 h-auto mx-auto flex items-center justify-between">
+          <p>Personal Details</p>
+          <p
+            className="text-primary font-bold cursor-pointer"
+            onClick={() => {
+              changeDetails && onSubmit();
+              setChangeDetails((prevState) => !prevState);
+            }}
+          >
+            {changeDetails ? "done" : "Change"}
+          </p>
+        </div>
+      </main>
     </section>
   );
 }
