@@ -1,4 +1,11 @@
 import { useState } from "react";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
+import { setDoc, doc, serverTimestamp } from "firebase/firestore";
+import { db } from "../firebase.config";
 import { Link, useNavigate } from "react-router-dom";
 import { FiEye } from "react-icons/fi";
 
@@ -12,7 +19,7 @@ function SignUp() {
 
   const { name, email, password } = formData;
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const onChange = (e) => {
     setFormData((prevState) => ({
@@ -21,13 +28,41 @@ function SignUp() {
     }));
   };
 
+  const onSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const auth = getAuth();
+
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+      const user = userCredential.user;
+
+      updateProfile(auth.currentUser, { displayName: name });
+
+      const formDataCopy = { ...formData };
+      delete formDataCopy.password;
+      formDataCopy.timestamp = serverTimestamp();
+
+      await setDoc(doc(db, "users", user.uid), formDataCopy);
+
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <header>
         <p className="text-2xl font-bold text-center mt-4">Register</p>
       </header>
       <div className="w-80 mx-auto my-12 bg-secondary shadow-md rounded-lg px-8 pt-6 pb-8 mb-4 flex flex-col">
-        <form>
+        <form onSubmit={onSubmit}>
           <div className="mb-4">
             <label
               className="block text-grey-darker text-sm font-bold mb-2"

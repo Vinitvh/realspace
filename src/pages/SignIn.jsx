@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { FiEye } from "react-icons/fi";
 
@@ -11,7 +12,7 @@ function SignIn() {
 
   const { email, password } = formData;
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const onChange = (e) => {
     setFormData((prevState) => ({
@@ -20,13 +21,32 @@ function SignIn() {
     }));
   };
 
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    const auth = getAuth();
+
+    const userCredential = await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+
+    if (userCredential.user) {
+      navigate("/");
+    }
+    try {
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <header>
         <p className="text-2xl font-bold text-center mt-4">Welcome Back!</p>
       </header>
       <div className="w-80 mx-auto my-12 bg-secondary shadow-md rounded-lg px-8 pt-6 pb-8 mb-4 flex flex-col">
-        <form>
+        <form onSubmit={onSubmit}>
           <div className="mb-4">
             <label
               className="block text-grey-darker text-sm font-bold mb-2"
