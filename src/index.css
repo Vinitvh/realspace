@@ -12,3 +12,16 @@ body {
   min-height: 100vh;
   background: #f8fafc;
 }
+
+.profileName,
+.profileEmai {
+  all: unset;
+  margin: 0.3rem 0;
+  font-weight: 600;
+  width: 100%;
+}
+.profileNameActive,
+.profileEmailActive {
+  width: 100%;
+  background-color: rgba(44, 44, 44, 0.1);
+}
