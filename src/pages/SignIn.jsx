@@ -2,7 +2,8 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
-import { FiEye } from "react-icons/fi";
+import { FiEye, FiArrowRight } from "react-icons/fi";
+import Oauth from "../components/Oauth";
 
 function SignIn() {
   const [showPassword, setShowPassword] = useState(false);
@@ -45,7 +46,7 @@ function SignIn() {
       <header>
         <p className="text-2xl font-bold text-center mt-4">Welcome Back!</p>
       </header>
-      <div className="w-80 mx-auto my-12 bg-secondary shadow-md rounded-lg px-8 pt-6 pb-8 mb-4 flex flex-col">
+      <div className="w-80 mx-auto my-10 bg-secondary shadow-md rounded-lg px-8 pt-6 pb-8 mb-4 flex flex-col">
         <form onSubmit={onSubmit}>
           <div className="mb-4">
             <label
@@ -87,10 +88,13 @@ function SignIn() {
           </div>
           <div className="flex items-center justify-between">
             <button
-              className="bg-primary text-white font-bold py-2 px-4 rounded"
+              className="flex items-center bg-primary text-white font-bold py-2 px-4 rounded"
               type="submit"
             >
-              Sign In
+              Sign In{" "}
+              <span className="pl-2">
+                <FiArrowRight />
+              </span>
             </button>
             <Link
               to="/forgot-password"
@@ -100,6 +104,8 @@ function SignIn() {
             </Link>
           </div>
         </form>
+        <span className="text-center font-bold mt-4 text-primary">or</span>
+        <Oauth />
         <Link
           to="/sign-up"
           className="text-center mt-4 text-primary hover:underline font-bold"

@@ -9,6 +9,7 @@ import { setDoc, doc, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase.config";
 import { Link, useNavigate } from "react-router-dom";
 import { FiEye } from "react-icons/fi";
+import Oauth from "../components/Oauth";
 
 function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
@@ -64,7 +65,7 @@ function SignUp() {
       <header>
         <p className="text-2xl font-bold text-center mt-4">Register</p>
       </header>
-      <div className="w-80 mx-auto my-12 bg-secondary shadow-md rounded-lg px-8 pt-6 pb-8 mb-4 flex flex-col">
+      <div className="w-80 mx-auto my-2 bg-secondary shadow-md rounded-lg px-8 pt-6 pb-8 mb-4 flex flex-col">
         <form onSubmit={onSubmit}>
           <div className="mb-4">
             <label
@@ -130,6 +131,8 @@ function SignUp() {
             </button>
           </div>
         </form>
+        <span className="text-center font-bold mt-4 text-primary">or</span>
+        <Oauth />
         <Link
           to="/sign-in"
           className="text-center mt-4 text-primary hover:underline font-bold"
