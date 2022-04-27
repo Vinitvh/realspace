@@ -24,7 +24,7 @@ function Explore() {
             <p>Places for Rent</p>
           </div>
           <div>
-            <Link to="/category/rent">
+            <Link to="/category/sale">
               <img
                 src={saleCategoryImg}
                 alt="Sale Category"
