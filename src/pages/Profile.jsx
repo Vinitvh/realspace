@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { getAuth, updateProfile } from "firebase/auth";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase.config";
 import { useNavigate } from "react-router-dom";
+import { FiArrowRight } from "react-icons/fi";
 import { toast } from "react-toastify";
 
 function Profile() {
@@ -91,6 +93,13 @@ function Profile() {
               onChange={onChange}
             />
           </form>
+        </div>
+        <div className="mt-12 flex items-center justify-center">
+          <Link to="/create-listing">
+            <p className="flex items-center bg-secondary px-3 py-1 rounded-lg text-primary font-bold">
+              Sell or Rent your home <FiArrowRight className="ml-2"/>
+            </p>
+          </Link>
         </div>
       </main>
     </section>
