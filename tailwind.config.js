@@ -5,8 +5,10 @@ module.exports = {
     colors: {
       primary: "#116466",
       secondary: "#ffcb9a",
-      rose: "#e11d48",
+      rose: "#fc6767",
       white: "#ffffff",
+      black: "#000000",
+      gray: "#a9a9a9",
     },
   },
   plugins: [],

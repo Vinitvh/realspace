@@ -10,6 +10,7 @@ import {
 } from "firebase/firestore";
 import { db } from "../firebase.config";
 import { toast } from "react-toastify";
+import ListingsItem from "../components/ListingsItem";
 
 function Category() {
   const [listings, setListings] = useState([]);
@@ -66,10 +67,14 @@ function Category() {
         <h3>Loading...</h3>
       ) : listings && listings.length > 0 ? (
         <>
-          <main>
-            <ul>
+          <main className="mt-4">
+            <ul className="w-auto h-64 flex flex-col md:flex-row">
               {listings.map((listing) => (
-                <h3 key={listing.id}>{listing.data.name}</h3>
+                <ListingsItem
+                  listing={listing.data}
+                  id={listing.id}
+                  key={listing.id}
+                />
               ))}
             </ul>
           </main>
