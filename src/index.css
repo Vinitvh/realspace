@@ -15,6 +15,10 @@ body {
   line-height: 1.6;
 }
 
+input, textarea {
+  background: #f8fafc;
+}
+
 .profileName,
 .profileEmai {
   all: unset;

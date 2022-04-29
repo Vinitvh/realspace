@@ -68,13 +68,13 @@ function CreateListing() {
   };
 
   return (
-    <section className="mt-4">
+    <section className="mt-4 flex flex-col items-center justify-center">
       <header>
         <p className="text-center font-bold">Create a Listing</p>
       </header>
 
       <main className="mt-10">
-        <form className="mx-12">
+        <form className="mx-12 bg-white px-20 py-4 rounded-lg">
           <label className="text-sm font-bold">Sell / Rent</label>
           <div className="flex my-4">
             <button
@@ -240,6 +240,93 @@ function CreateListing() {
               </div>
             </div>
           )}
+          <div>
+            <label className="text-sm font-bold">Offer</label>
+            <div className="flex my-4">
+              <button
+                type="button"
+                className={
+                  offer
+                    ? "px-2 py-1 bg-primary"
+                    : "px-5 py-1 bg-secondary rounded-lg mr-2"
+                }
+                id="offer"
+                value={true}
+                onClick={onMutate}
+              >
+                Yes
+              </button>
+              <button
+                type="button"
+                className={
+                  !offer && offer !== null
+                    ? "px-5 py-1 bg-primary rounded-lg"
+                    : "bg-gray"
+                }
+                id="offer"
+                value={false}
+                onClick={onMutate}
+              >
+                No
+              </button>
+            </div>
+          </div>
+          <div className="flex flex-col">
+            <label className="text-sm font-bold my-4">Regular Price</label>
+            <div className="flex">
+              <input
+                type="number"
+                className="w-40 h-auto text-center rounded mr-2"
+                id="regularPrice"
+                value={regularPrice}
+                onChange={onMutate}
+                min="50"
+                max="5000000000"
+                required
+              />
+              {formData.type === "rent" && (
+                <p className="text-sm font-bold">₹ / month</p>
+              )}
+            </div>
+          </div>
+          {offer && (
+            <div className="flex flex-col">
+              <label className="text-sm font-bold my-4">Discounted Price</label>
+              <div className="flex">
+                <input
+                  type="number"
+                  className="w-40 h-auto text-center rounded mr-2"
+                  id="discountedPrice"
+                  value={discountedPrice}
+                  onChange={onMutate}
+                  min="50"
+                  max="5000000000"
+                  required={offer}
+                />
+                {formData.type === "rent" && (
+                  <p className="text-sm font-bold">₹ / month</p>
+                )}
+              </div>
+            </div>
+          )}
+
+          <div className="flex flex-col">
+            <label className="text-sm font-bold mt-4">Images</label>
+            <p className="text-sm text-gray">
+              The first image will be cover (max 6).
+            </p>
+            <input
+              type="file"
+              className="w-90 h-auto rounded"
+              id="images"
+              onChange={onMutate}
+              max="6"
+              accept=".jpg,.png,.jpeg"
+              multiple
+              required
+            />
+          </div>
+          <button type="submit" className="w-96 my-6 px-4 py-1 bg-primary mx-auto rounded-lg text-white font-bold">Create Listing</button>
         </form>
       </main>
     </section>
