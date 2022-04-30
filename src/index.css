@@ -15,7 +15,8 @@ body {
   line-height: 1.6;
 }
 
-input, textarea {
+input,
+textarea {
   background: #f8fafc;
 }
 
@@ -30,4 +31,15 @@ input, textarea {
 .profileEmailActive {
   width: 100%;
   background-color: rgba(44, 44, 44, 0.1);
+}
+
+.formInputFile::-webkit-file-upload-button {
+  background-color: #116466;
+  border: none;
+  color: #ffffff;
+  font-weight: 600;
+  padding: 0.3rem 0.75rem;
+  border-radius: 1rem;
+  margin-right: 1rem;
+  cursor: pointer;
 }
