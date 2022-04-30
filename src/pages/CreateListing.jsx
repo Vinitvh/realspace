@@ -64,17 +64,48 @@ function CreateListing() {
   }
 
   const onMutate = (e) => {
+    let boolean = null;
+
+    if (e.target.value === "true") {
+      boolean = true;
+    }
+    if (e.target.value === "false") {
+      boolean = false;
+    }
+
+    // files
+    if (e.target.files) {
+      setFormData((prevState) => ({
+        ...prevState,
+        images: e.target.files,
+      }));
+    }
+
+    //text/boolean/numbers
+    if (!e.target.files) {
+      setFormData((prevState) => ({
+        ...prevState,
+        [e.target.id]: boolean ?? e.target.value,
+      }));
+    }
+  };
+
+  const onSubmit = (e) => {
     e.preventDefault();
+    console.log(formData);
   };
 
   return (
-    <section className="mt-4 flex flex-col items-center justify-center">
+    <section className="my-4 flex flex-col items-center justify-center">
       <header>
         <p className="text-center font-bold">Create a Listing</p>
       </header>
 
       <main className="mt-10">
-        <form className="mx-12 bg-white px-20 py-4 rounded-lg">
+        <form
+          onSubmit={onSubmit}
+          className="mx-12 bg-white px-20 py-4 rounded-lg"
+        >
           <label className="text-sm font-bold">Sell / Rent</label>
           <div className="flex my-4">
             <button
@@ -102,22 +133,25 @@ function CreateListing() {
               Rent
             </button>
           </div>
-          <label>Name</label>
-          <input
-            type="text"
-            id="name"
-            value={name}
-            onChange={onMutate}
-            maxLength="32"
-            minLength="10"
-            required
-          />
+          <div className="flex flex-col">
+            <label className="text-sm font-bold mb-2">Name</label>
+            <input
+              type="text"
+              className="rounded"
+              id="name"
+              value={name}
+              onChange={onMutate}
+              maxLength="32"
+              minLength="10"
+              required
+            />
+          </div>
           <div className="flex my-4">
             <div className="flex flex-col mr-4">
-              <label>Bedrooms</label>
+              <label className="text-sm font-bold mb-2">Bedrooms</label>
               <input
                 type="number"
-                className="w-10 h-auto rounded bg-secondary text-center"
+                className="w-10 h-auto rounded text-center"
                 id="bedrooms"
                 value={bedrooms}
                 onChange={onMutate}
@@ -127,10 +161,10 @@ function CreateListing() {
               />
             </div>
             <div className="flex flex-col">
-              <label>Bathrooms</label>
+              <label className="text-sm font-bold mb-2">Bathrooms</label>
               <input
                 type="number"
-                className="w-10 h-auto rounded bg-secondary text-center"
+                className="w-10 h-auto rounded text-center"
                 id="bathrooms"
                 value={bathrooms}
                 onChange={onMutate}
@@ -326,7 +360,12 @@ function CreateListing() {
               required
             />
           </div>
-          <button type="submit" className="w-96 my-6 px-4 py-1 bg-primary mx-auto rounded-lg text-white font-bold">Create Listing</button>
+          <button
+            type="submit"
+            className="w-96 my-6 px-4 py-1 bg-primary mx-auto rounded-lg text-white font-bold"
+          >
+            Create Listing
+          </button>
         </form>
       </main>
     </section>
